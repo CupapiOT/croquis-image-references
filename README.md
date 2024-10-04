@@ -5,7 +5,7 @@ using their own references offline.
 
 ## Description
 
-![Image References App Showcase](https://github.com/user-attachments/assets/a820be68-12a7-45a9-a565-15a136f56c5b)
+![Image References App Showcase](https://github.com/user-attachments/assets/ad36978a-c101-48f2-97a4-77fb0317bda0)
 
 A simple desktop application that anyone can use to practice croquis, using their own files from folders within their computer. The basic functionality &mdash; a timer and the ability to load files &mdash; are easy and intuitive to use.
 Of course, you could also simply use it to go through your images one at a time.
