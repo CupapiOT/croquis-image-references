@@ -1,0 +1,26 @@
+# How to fix the last directories not loading on launch:
+1. Make sure that the "Load Last Folders On Launch" option is ticked on.
+2. Open the preferences.txt file that should be there after the first time you open the app.
+3. Look for " 'wait_directory_load': 0.0 " inside of it. This option ('wait_directory_load') controls the amount of time (measured in seconds) before the program loads your last saved directories; the default value is set to 0.0 seconds.
+4. Change the 0.0 to a slightly higher number. (Example -->  'wait_directory_load': 0.15)
+5. Save the file and restart the program. If the problem still remains, set it to a higher value. If even that doesn't work, then feel free to write an issue on the GitHub repository.
+
+
+# List of Keyboard Shortcuts
+A. Folder Menu Shortcuts:
+1. Alt                                = Opens the settings menu.
+2. Alt + O / Ctrl + O                 = Opens a folder. This is the button that would add the new selected folder on top of the current queue.
+3. Alt + Shift + O / Ctrl + Shift + O = Switches to a new folder. This is the button that resets the queue and switches it to a different .
+4. Alt + S                            = Switches the theme of the program from dark to light mode and vice versa.
+5. Enter                              = This saves the image limit you've inputted in the image limit entry field without needing to press the save button next to it.
+
+B. Timer Shortcuts:
+1. Ctrl + S = Start the timer.
+2. Space    = Pause/Plays the timer.
+3. Ctrl + R = Resets the timer.
+
+C. Image Change Shortcuts:
+1. Left Arrow  = Goes to the previous image in the queue.
+2. Right Arrow = Goes image to the next image in the queue.
+3. Up Arrow    = Goes to the last image in the queue.
+4. Down Arrow  = Goes to the first image in the queue.
