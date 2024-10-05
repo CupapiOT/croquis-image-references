@@ -1,3 +1,10 @@
+# How to fix app not launching after editing `preferences.txt` file:
+1. Double-check that what you inputted was correct, and try again.
+2. If the app still doesn't run, delete `preferences.txt`.
+3. Run the app.
+4. If the app still doesn't run, feel free to write an issue on GitHub through this link: `https://github.com/CupapiOT/croquis-image-references/issues/new/choose`
+
+
 # How to fix the last directories not loading on launch:
 1. Make sure that the "Load Last Folders On Launch" option is ticked on.
 2. Open the preferences.txt file that should be there after the first time you open the app.
