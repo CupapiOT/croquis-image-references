@@ -1,6 +1,11 @@
 # Release History
 
-**Note**: Versions prior to 1.3.17 did not use Git for version control. The changes you see below are taken from `README.txt` files from their respective versions.
+## 1.3.18 - 2024-10-05
+
+### Additions
+ - Increased robustness of error-handling for users editing the `preferences.txt` file for a more user-friendly experience. See [the commit](https://github.com/CupapiOT/croquis-image-references/commit/3e1256b80efc4659e41420ce49b84ae78fec6c37).
+
+**Note**: Versions prior to 1.3.18 did not use Git for version control. The changes you see below are taken from `README.txt` files from their respective versions (not available on GitHub).
 
 ## 1.3.17 - 2024-04-14
 
@@ -67,7 +72,9 @@
 
 
 ## Earlier Versions (Undocumented)
+
 **Note**: The dates beside the version numbers are likely to be false. They were taken from the "modified" property of their respective `Image References.exe` files.
+
 ### 1.0.0 - 2023-08-18
  - Improvements and bug-fixes (Not Documented).
 

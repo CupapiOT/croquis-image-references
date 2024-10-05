@@ -84,30 +84,31 @@ If you’re unsure about something or want to suggest a feature, feel free to [o
 
 ## Version History
 
-**Note**: Versions prior to 1.3.17 did not use Git for version control.
+See [release history](CHANGELOG.md) for full details on each version.
 
+**Note**: Versions prior to 1.3.18 did not use Git for version control.
+
+* 1.3.18
+    * Increased robustness of error-handling for users editing the `preferences.txt` file.
+    * See [the commit](https://github.com/CupapiOT/croquis-image-references/commit/3e1256b80efc4659e41420ce49b84ae78fec6c37).
 * 1.3.17
     * Fixed a bug related to input-handling in the timer.
-    * See [release history](CHANGELOG.md?plain=1#L8) for full details.
 * 1.3.16
     * Fixed a visual bug where the program displayed the incorrect status.
-    * See [release history](CHANGELOG.md?plain=1#L18) for full details.
 * 1.3.15
     * Added save-load system.
     * Added two settings for new save-load system.
     * Added keyboard shortcuts as alternatives to already available ones.
     * Fixed a bug where the program doesn't detect an image with a non-lowercase file extension.
-    * See [release history](CHANGELOG.md?plain=1#L22) for full details.
 * 1.29.29
     * Added dark mode.
     * Added image-limit option.
     * Added keyboard short-cut hints in settings menu.
     * Re-added previously removed feature.
-    * See [release history](CHANGELOG.md?plain=1#L39) for full details.
 * 1.0.8
     * Added an "Add New Folder to Current Queue" menu option in the folder 
       menu.
-    * Various bug fixes, see [release history](CHANGELOG.md?plain=1#L56) for full details.
+    * Various bug fixes.
 * 1.0.0
     * Improvements and bug-fixes (Not Documented).
 * 0.9.13
