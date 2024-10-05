@@ -23,29 +23,15 @@ class App(ctk.CTk):
         super().__init__()
 
         # # button colors
-        self.button_theme_color = {'normal': ('#EB6864', '#1F6AA5'),
-                                   'hover_color': ('#ED7773', '#144770'),
-                                   'disabled': ('#CCCCCC', '#383838')
-                                   }
+        self.button_theme_color = {
+            'normal': ('#EB6864', '#1F6AA5'),
+            'hover_color': ('#ED7773', '#144770'),
+            'disabled': ('#CCCCCC', '#383838')
+            }
 
         # dictionary for the size changer
         self.size_dict = {size_changer_sizes[0]: self.create_normal_layout,
                           size_changer_sizes[1]: self.create_wide_layout}
-
-        # dictionary for the default preferences
-        self.default_preferences = {
-            'directories': [],
-            'theme': 'system',
-            'image_limit': 0,
-            'countdown': True,
-            'randomize': True,
-            'loop': False,
-            'alert_queue_complete': False,
-            'timer_temp': 30,
-            'load_timer_temp': True,
-            'load_saved_directories': True,
-            'wait_directory_load': 0.0
-            }
 
         # geometry settings
         self.mid_window_width = int(self.winfo_screenwidth()
@@ -83,19 +69,35 @@ class App(ctk.CTk):
             border_width=0
             )
 
+        # dictionary for the default preferences
+        self.default_preferences = {
+            'directories': [],
+            'theme': 'system',
+            'image_limit': 0,
+            'countdown': True,
+            'randomize': True,
+            'loop': False,
+            'alert_queue_complete': False,
+            'timer_temp': 30,
+            'load_timer_temp': True,
+            'load_saved_directories': True,
+            'wait_directory_load': 0.0
+        }
+
         # # save and load system
         self.save_load_system = SaveLoadSystem(
             file_name='preferences',
             extension='.txt',
-            default_values=self.default_preferences
+            default_values=self.default_preferences,
+            mutable_keys=False
             )
 
-        # # widgets
+        # # widgets (these have to be put after save_load_system)
         self.image_frame = ImageFrame(self)
         self.timer_frame = TimerFrame(
             self.group_up_frame,
             window=self
-            )
+        )
         self.button_frame = ButtonFrame(
             parent=self.everything_else_frame,
             image_button_parent=self.group_up_frame,
@@ -104,7 +106,6 @@ class App(ctk.CTk):
         self.settings_menu = SettingsMenu(self)
 
         self.size_notifier = SizeNotifier(self, self.size_dict)
-
         # reset the saved directories if load_saved_directories was
         # previously turned off
         if not self.save_load_system.values['load_saved_directories']:
@@ -380,8 +381,9 @@ class App(ctk.CTk):
                 self.timer_frame.opened_folder = True
 
         except IndexError:
-            print('OpenFolderError: Folder selection cancelled or there were '
-                  'no images in the folder.')
+            print('OpenFolderWarning: Folder selection cancelled, '
+                  'the directory was invalid, or there were no images in the '
+                  'folder.')
 
 
 class ImageFrame(ctk.CTkFrame):
@@ -1932,43 +1934,137 @@ class SettingsMenu(ctk.CTkButton):
 
 
 class SaveLoadSystem:
-    """A simple save and load system that uses a .txt file by default."""
+    """A simple save and load system that uses a .txt file with a
+    Python dictionary by default."""
 
-    def __init__(self, file_name: str = 'data',
+    def __init__(self,
+                 file_name: str,
                  extension: str = 'txt',
-                 default_values: dict = None):
-        # create the file name and its extension with the arguments,
+                 default_values: dict = None,
+                 mutable_keys: bool = True) -> None:
+        """
+        Initializes a new SaveLoadSystem object.
+
+        :param file_name: The name of the file that must be loaded and
+        saved to.
+        :param extension: The file extension of that file.
+        :param default_values: The default values of the file.
+        :param mutable_keys: Whether the keys can be different
+        from the values within default_values or not.
+        """
+        # Create the file name and its extension with the arguments,
         # this accounts for the use of a period before the extension of
         # the file.
         self.file_name = (
-            f'{file_name}.'
-            f'{extension[1::] if "." in extension[0] else extension}'
+            f'{file_name}'
+            f'.{extension[1::] if "." in extension[0] else extension}'
             )
 
-        # tries to open the file with the file name, and makes it into a
+        self.values = self.initialize_values(self.file_name, default_values)
+        if not mutable_keys:
+            self.values = self.validate_values(
+                file_name=self.file_name,
+                values=self.values,
+                values_to_compare_to=default_values
+                )
+
+    def _load_default_values(
+            self,
+            file_name: str,
+            log: str = "Default values loaded: ",
+            values_to_load: dict = None
+    ) -> dict:
+        print(f'{log}'
+              f'{values_to_load if values_to_load is not None else {}}'
+              )
+        values = values_to_load if values_to_load is not None else {}
+        self.save_value(input_value=values, file_name=file_name)
+        return values
+
+    def initialize_values(self, file_name, default_values) -> dict:
+        load_default_values = lambda log: self._load_default_values(
+            file_name=file_name,
+            log=log,
+            values_to_load=default_values
+        )
+        # User-friendly warning.
+        show_warning_messagebox = lambda title, error: messagebox.showwarning(
+            title=title,
+            message=f'Default values loaded.\n'
+                    f'Please double-check your configuration next time.\n'
+                    f'Traceback: {error}'
+        )
+
+        # Tries to open the file with the file name, and makes it into a
         # new file if it's not there yet.
         try:
-            self.values = ast.literal_eval(self.load_value(self.file_name))
-            print(f'Loaded values: {self.values}')
+            values = ast.literal_eval(self.load_value(file_name))
+            print(f'Loaded values: {values}')
         except FileNotFoundError:
-            print(f'Creating a new values file...\nDefault values: '
-                  f'{default_values if default_values is not None else {}}'
-                  )
-            self.values = default_values if default_values is not None else {}
-            self.save_value(input_value=self.values, file_name=self.file_name)
+            values = load_default_values(
+                f'Creating a new {file_name} (values file)...\n'
+                f'Default values: '
+            )
+        except SyntaxError as e:
+            values = load_default_values(
+                f'{file_name} (values file) is empty or has incorrect '
+                f'syntax...\n'
+                f'Default values loaded: '
+            )
+            show_warning_messagebox(title='SyntaxError', error=e)
+        except ValueError as e:
+            values = load_default_values(
+                f'The values in {file_name} (values file) cannot be '
+                f'parsed...\n'
+                f'Default values loaded: '
+            )
+            show_warning_messagebox(title='ValueError', error=e)
 
-    # saves the values by re-writing the values into the file
+        return values
+
+    def validate_values(
+            self,
+            values: dict,
+            values_to_compare_to: dict,
+            file_name: str
+    ) -> dict:
+        differing_keys = set(values.keys()).difference(
+            set(values_to_compare_to.keys())
+        )
+
+        if not differing_keys:
+            return values
+
+        messagebox.showwarning(
+            title='Changed Keys Detected',
+            message=f'Please only change the values after the keys.\n'
+                    f'The program is not designed to handle different '
+                    f'keys.\n'
+                    f'Differing keys: {differing_keys}'
+        )
+        values = self._load_default_values(
+            log=f'(mutable_keys=False) Loaded values have different '
+                f'keys...\n'
+                f'Differing keys: {differing_keys}'
+                f'Default values loaded: ',
+            values_to_load=values_to_compare_to,
+            file_name=file_name
+        )
+        return values
+
+    # Saves the values by re-writing the values into the file.
     @staticmethod
     def save_value(input_value, file_name):
         with open(file_name, 'w') as f:
             f.write(str(input_value))
 
-    # loads the values by just reading the file and returning the result
+    # loads the values by reading the file and returning the result
     @staticmethod
     def load_value(file_name):
         with open(file_name, 'r') as f:
             read = f.read()
         return read
+
 
 
 # # setup
