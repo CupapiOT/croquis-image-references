@@ -61,9 +61,9 @@ Note: You may not need the newest versions of these modules, as this project was
 
 ## Help
 
-Please read the [help.txt](help.txt) file for help on a potential low-end device specific issue, and for a full list of keyboard shortcuts.
+Please read the [help.txt](help.txt) file for help on troubleshooting and a copy of the above guide on how to get started, and for a full list of keyboard shortcuts.
 
-If you're facing other issues not present within the file, feel free to [open an issue](https://github.com/CupapiOT/image-references/issues) on GitHub.
+If you're facing other issues not present within the file, feel free to [open an issue](https://github.com/CupapiOT/croquis-image-references/issues) on GitHub.
 
 ## Contributions
 
