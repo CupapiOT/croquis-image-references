@@ -5,36 +5,6 @@ I hope this application serves you well.
 Below is a short guide on installation and execution and troubleshooting steps for the only two problems the author thought would reasonably happen. For issues not found in this file, feel free to open up and issue on Github through the following link: `https://github.com/CupapiOT/croquis-image-references/issues`
 
 
-# Installation and Execution
-
-## Installation
-1. Fork the repository.
-2. Clone your fork locally.
-3. Run `pip install -r requirements.txt` to install dependencies.
-
-## Executing and using the program
-1. Run the `main.py` file.
-2. After installation and execution, simply open a folder from your computer from the settings icon inside the program and set the timer up as you please, then click the start button. 
-3. You can change the time while it's going by pressing the pause button and editing the time, or you can reset the timer to when you started it via the reset timer button.
-4. You can toggle between light and dark mode by clicking the settings icon and pressing the button to switch between them.
-5. Adjust other settings, such as image queue randomization or folder looping, by toggling the options in the settings menu.
-
-
-# Troubleshooting.
-
-## How to fix app not launching after editing `preferences.txt` file:
-1. Double-check that what you inputted was correct, and try again.
-2. If the app still doesn't run, delete `preferences.txt`.
-3. Run the app.
-4. If the app still doesn't run, feel free to write an issue on GitHub through the link given above. 
-## How to fix the last directories not loading on launch:
-1. Make sure that the "Load Last Folders On Launch" option is ticked on.
-2. Open the preferences.txt file that should be there after the first time you open the app.
-3. Look for " 'wait_directory_load': 0.0 " inside of it. This option ('wait_directory_load') controls the amount of time (measured in seconds) before the program loads your last saved directories; the default value is set to 0.0 seconds.
-4. Change the 0.0 to a slightly higher number. (Example -->  'wait_directory_load': 0.15)
-5. Save the file and restart the program. If the problem still remains, set it to a higher value. If even that doesn't work, then feel free to write an issue on the GitHub repository.
-
-
 # List of Keyboard Shortcuts
 
 A. Folder Menu Shortcuts:
@@ -45,12 +15,44 @@ A. Folder Menu Shortcuts:
 5. Enter                              = This saves the image limit you've inputted in the image limit entry field without needing to press the save button next to it.
 
 B. Timer Shortcuts:
-1. Ctrl + S = Start the timer.
-2. Space    = Pause/Plays the timer.
-3. Ctrl + R = Resets the timer.
+1. Ctrl + S    = Start the timer.
+2. Space       = Pause/Play the timer.
+3. Ctrl + R    = Reset the timer.
 
 C. Image Change Shortcuts:
 1. Left Arrow  = Goes to the previous image in the queue.
-2. Right Arrow = Goes image to the next image in the queue.
+2. Right Arrow = Goes to the next image in the queue.
 3. Up Arrow    = Goes to the last image in the queue.
 4. Down Arrow  = Goes to the first image in the queue.
+
+# Troubleshooting.
+
+## How to fix app not launching after editing `preferences.txt` file:
+
+1. Double-check that what you inputted was correct, and try again.
+2. If the app still doesn't run, delete `preferences.txt`.
+3. Run the app.
+4. If the app still doesn't run, feel free to write an issue on GitHub through the link given above. 
+
+## How to fix the last directories not loading on launch:
+
+1. Make sure that the "Load Last Folders On Launch" option is ticked on.
+2. Open the preferences.txt file that should be there after the first time you open the app.
+3. Look for " 'wait_directory_load': 0.0 " inside of it. This option ('wait_directory_load') controls the amount of time (measured in seconds) before the program loads your last saved directories; the default value is set to 0.0 seconds.
+4. Change the 0.0 to a slightly higher number. (Example -->  'wait_directory_load': 0.15)
+5. Save the file and restart the program. If the problem still remains, set it to a higher value. If even that doesn't work, then feel free to write an issue on the GitHub repository.
+
+
+# Installation and Execution
+
+From source (not recommended for non-technical users):
+1. Fork the repository.
+2. Clone your fork locally.
+3. Run `pip install -r requirements.txt` to install dependencies.
+4. Run the `main.py` file.
+5. After installation and execution, simply open a folder from your computer from the settings icon inside the program and set the timer up as you please, then click the start button. 
+6. You can change the time while it's going by pressing the pause button and editing the time, or you can reset the timer to when you started it via the reset timer button.
+7. You can toggle between light and dark mode by clicking the settings icon and pressing the button to switch between them.
+8. Adjust other settings, such as image queue randomization or folder looping, by toggling the options in the settings menu.
+
+
