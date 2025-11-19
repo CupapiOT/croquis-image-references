@@ -1,4 +1,4 @@
-"""Current version: v1.3.18"""
+"""Current version: v1.3.20"""
 
 # Import the necessary modules.
 import customtkinter as ctk

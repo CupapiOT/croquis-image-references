@@ -2,8 +2,9 @@ Thank you for using Image References!
 
 I hope this application serves you well.
 
-Below is a short guide on installation and execution and troubleshooting steps for the only two problems the author thought would reasonably happen. For issues not found in this file, feel free to open up and issue on Github through the following link: `https://github.com/CupapiOT/croquis-image-references/issues`
+Below is the full list of keyboard shortcuts, and a guide on troubleshooting steps for the only two problems the author thought would reasonably happen. For issues not found in this file, feel free to open up and issue on Github through the following link: `https://github.com/CupapiOT/croquis-image-references/issues`
 
+---
 
 # List of Keyboard Shortcuts
 
@@ -25,6 +26,8 @@ C. Image Change Shortcuts:
 3. Up Arrow    = Goes to the last image in the queue.
 4. Down Arrow  = Goes to the first image in the queue.
 
+---
+
 # Troubleshooting.
 
 ## How to fix app not launching after editing `preferences.txt` file:
@@ -41,18 +44,3 @@ C. Image Change Shortcuts:
 3. Look for " 'wait_directory_load': 0.0 " inside of it. This option ('wait_directory_load') controls the amount of time (measured in seconds) before the program loads your last saved directories; the default value is set to 0.0 seconds.
 4. Change the 0.0 to a slightly higher number. (Example -->  'wait_directory_load': 0.15)
 5. Save the file and restart the program. If the problem still remains, set it to a higher value. If even that doesn't work, then feel free to write an issue on the GitHub repository.
-
-
-# Installation and Execution
-
-From source (not recommended for non-technical users):
-1. Fork the repository.
-2. Clone your fork locally.
-3. Run `pip install -r requirements.txt` to install dependencies.
-4. Run the `main.py` file.
-5. After installation and execution, simply open a folder from your computer from the settings icon inside the program and set the timer up as you please, then click the start button. 
-6. You can change the time while it's going by pressing the pause button and editing the time, or you can reset the timer to when you started it via the reset timer button.
-7. You can toggle between light and dark mode by clicking the settings icon and pressing the button to switch between them.
-8. Adjust other settings, such as image queue randomization or folder looping, by toggling the options in the settings menu.
-
-
