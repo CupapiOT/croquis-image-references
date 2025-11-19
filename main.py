@@ -10,13 +10,14 @@ from random import shuffle
 from threading import Timer
 import ast
 import os, sys
+from typing import Any
 
 
 class App(ctk.CTk):
     def __init__(
         self,
         title: str = "Python Application",
-        icon: str = None,
+        icon: str | None = None,
         geometry: tuple[int, int] = (600, 500),
         size_changer_sizes: tuple[int, int] = (600, 1000),
         min_height: int = 0,
@@ -543,7 +544,7 @@ class TimerFrame(ctk.CTkFrame):
     every function necessary for the timer.
     """
 
-    def __init__(self, parent: any, window: any):
+    def __init__(self, parent: Any, window: Any):
         # setup
         super().__init__(
             master=parent,
@@ -555,11 +556,11 @@ class TimerFrame(ctk.CTkFrame):
         self.values = self.root.save_load_system.values
 
         # declare timer input numbers as integer
-        self.temp = int
+        self.temp = 0
         self.save_temp = (
             int(self.values["timer_temp"]) if self.values["load_timer_temp"] else 0
         )
-        self.countdown_temp = int
+        self.countdown_temp = 0
 
         # declare timer string variables and setting the default value
         # as 0 except for second which is 30
@@ -1239,7 +1240,7 @@ class TimerFrame(ctk.CTkFrame):
 class ButtonFrame(ctk.CTkFrame):
     """Contains every button needed to change the images."""
 
-    def __init__(self, parent: any, image_button_parent: any, window: any):
+    def __init__(self, parent: Any, image_button_parent: Any, window: Any):
 
         # # setup and variables needed
         super().__init__(master=parent, fg_color="transparent", corner_radius=0)
@@ -1594,7 +1595,7 @@ class ButtonFrame(ctk.CTkFrame):
 
 
 class SizeNotifier:
-    def __init__(self, parent: any, size_dictionary: dict):
+    def __init__(self, parent: Any, size_dictionary: dict):
         self.root = parent
         self.size_dict = {
             pixels: layout for pixels, layout in sorted(size_dictionary.items())
@@ -1622,7 +1623,7 @@ class SizeNotifier:
 class SettingsMenu(ctk.CTkButton):
     def __init__(
         self,
-        parent: any,
+        parent: Any,
         height: int = 41,
         width: int = 41,
         bg_color: str | tuple[str, str] = "transparent",
@@ -1902,14 +1903,16 @@ class SettingsMenu(ctk.CTkButton):
 
 
 class SaveLoadSystem:
-    """A simple save and load system that uses a .txt file with a
-    Python dictionary by default."""
+    """
+    A simple save and load system that uses a .txt file with a
+    Python dictionary by default.
+    """
 
     def __init__(
         self,
         file_name: str,
+        default_values: dict,
         extension: str = "txt",
-        default_values: dict = None,
         mutable_keys: bool = True,
     ) -> None:
         """
@@ -1940,8 +1943,8 @@ class SaveLoadSystem:
     def _load_default_values(
         self,
         file_name: str,
+        values_to_load: dict,
         log: str = "Default values loaded: ",
-        values_to_load: dict = None,
     ) -> dict:
         print(f"{log}" f"{values_to_load if values_to_load is not None else {}}")
         values = values_to_load if values_to_load is not None else {}
@@ -2002,8 +2005,7 @@ class SaveLoadSystem:
             f"Differing keys: {differing_keys}",
         )
         values = self._load_default_values(
-            log=f"(mutable_keys=False) Loaded values have different "
-            f"keys...\n"
+            log=f"(mutable_keys=False) Loaded values have different keys...\n"
             f"Differing keys: {differing_keys}"
             f"Default values loaded: ",
             values_to_load=values_to_compare_to,
