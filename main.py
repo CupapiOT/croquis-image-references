@@ -383,7 +383,9 @@ class ImageFrame(ctk.CTkFrame):
         )
 
         # image setup
-        self.image_original = Image.open("other_essentials/empty_placeholder.png")
+        self.image_original = Image.open(
+            resource_path("other_essentials/empty_placeholder.png")
+        )
         self.image_ratio = self.image_original.size[0] / self.image_original.size[1]
         self.image_tk = ImageTk.PhotoImage(self.image_original)
         self.resized_tk = None
@@ -642,19 +644,31 @@ class TimerFrame(ctk.CTkFrame):
 
         # image for time buttons
         self.start_time_image = ctk.CTkImage(
-            light_image=Image.open("app_widget_images/time_buttons/start_button.png"),
-            dark_image=Image.open("app_widget_images/time_buttons/start_button.png"),
+            light_image=Image.open(
+                resource_path("app_widget_images/time_buttons/start_button.png")
+            ),
+            dark_image=Image.open(
+                resource_path("app_widget_images/time_buttons/start_button.png")
+            ),
         )
         self.pause_start_time_image = ctk.CTkImage(
-            light_image=Image.open("app_widget_images/time_buttons/pause_button.png"),
-            dark_image=Image.open("app_widget_images/time_buttons/pause_button.png"),
+            light_image=Image.open(
+                resource_path("app_widget_images/time_buttons/pause_button.png")
+            ),
+            dark_image=Image.open(
+                resource_path("app_widget_images/time_buttons/pause_button.png")
+            ),
         )
         self.stop_reset_time_image = ctk.CTkImage(
             light_image=Image.open(
-                "app_widget_images/time_buttons/stop_and_reset_button.png"
+                resource_path(
+                    "app_widget_images/time_buttons/stop_and_reset_button.png"
+                )
             ),
             dark_image=Image.open(
-                "app_widget_images/time_buttons/stop_and_reset_button.png"
+                resource_path(
+                    "app_widget_images/time_buttons/stop_and_reset_button.png"
+                )
             ),
         )
 
@@ -1131,7 +1145,9 @@ class TimerFrame(ctk.CTkFrame):
         while self.temp >= 0:
             if self.temp > 0:
                 root.image_frame.image_original = Image.open(
-                    self.countdown_image_dict[ctk.get_appearance_mode()][self.temp]
+                    resource_path(
+                        self.countdown_image_dict[ctk.get_appearance_mode()][self.temp]
+                    )
                 )
                 root.image_frame.image_ratio = (
                     root.image_frame.image_original.size[0]
@@ -1257,30 +1273,52 @@ class ButtonFrame(ctk.CTkFrame):
         # # and light mode)
         self.previous_image_png = ctk.CTkImage(
             light_image=Image.open(
-                "app_widget_images/change_image_buttons/" "previous_image_button.png"
+                resource_path(
+                    "app_widget_images/change_image_buttons/"
+                    "previous_image_button.png"
+                )
             ),
             dark_image=Image.open(
-                "app_widget_images/change_image_buttons/" "previous_image_button.png"
+                resource_path(
+                    "app_widget_images/change_image_buttons/"
+                    "previous_image_button.png"
+                )
             ),
         )
         self.next_image_png = ctk.CTkImage(
-            Image.open("app_widget_images/change_image_buttons/next_image_button.png"),
             Image.open(
-                "app_widget_images/change_image_buttons/" "next_image_button.png"
+                resource_path(
+                    "app_widget_images/change_image_buttons/next_image_button.png"
+                )
+            ),
+            Image.open(
+                resource_path(
+                    "app_widget_images/change_image_buttons/" "next_image_button.png"
+                )
             ),
         )
         self.first_image_png = ctk.CTkImage(
-            Image.open("app_widget_images/change_image_buttons/first_image_button.png"),
             Image.open(
-                "app_widget_images/change_image_buttons/" "first_image_button.png"
+                resource_path(
+                    "app_widget_images/change_image_buttons/first_image_button.png"
+                )
+            ),
+            Image.open(
+                resource_path(
+                    "app_widget_images/change_image_buttons/" "first_image_button.png"
+                )
             ),
         )
         self.last_image_png = ctk.CTkImage(
             Image.open(
-                "app_widget_images/change_image_buttons/" "last_image_button.png"
+                resource_path(
+                    "app_widget_images/change_image_buttons/" "last_image_button.png"
+                )
             ),
             Image.open(
-                "app_widget_images/change_image_buttons/" "last_image_button.png"
+                resource_path(
+                    "app_widget_images/change_image_buttons/" "last_image_button.png"
+                )
             ),
         )
 
@@ -1445,7 +1483,9 @@ class ButtonFrame(ctk.CTkFrame):
 
     def update_image_original(self) -> None:
         self.root.image_frame.image_original = Image.open(
-            self.root.image_frame.directory_list[self.root.image_frame.frame_index]
+            resource_path(
+                self.root.image_frame.directory_list[self.root.image_frame.frame_index]
+            )
         )
         self.root.image_frame.image_ratio = (
             self.root.image_frame.image_original.size[0]
@@ -1593,15 +1633,15 @@ class SettingsMenu(ctk.CTkButton):
         self.parent = parent
         self.settings_icon = ctk.CTkImage(
             light_image=Image.open(
-                "app_widget_images/settings_menu/settings_icon_dark.png"
+                resource_path("app_widget_images/settings_menu/settings_icon_dark.png")
             ),
             dark_image=Image.open(
-                "app_widget_images/settings_menu/settings_icon_light.png"
+                resource_path("app_widget_images/settings_menu/settings_icon_light.png")
             ),
         )
         self.save_image_limit_icon = ctk.CTkImage(
-            Image.open("app_widget_images/settings_menu/save_icon.png"),
-            Image.open("app_widget_images/settings_menu/save_icon.png"),
+            Image.open(resource_path("app_widget_images/settings_menu/save_icon.png")),
+            Image.open(resource_path("app_widget_images/settings_menu/save_icon.png")),
         )
         self.values = self.parent.save_load_system.values
 
@@ -1983,6 +2023,16 @@ class SaveLoadSystem:
         with open(file_name, "r") as f:
             read = f.read()
         return read
+
+
+def resource_path(relative_path):
+    """PyInstaller Helper"""
+    # When running as a bundle
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, relative_path)
+
+    # When running from source
+    return os.path.join(os.path.abspath("."), relative_path)
 
 
 # # setup
