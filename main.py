@@ -3,21 +3,24 @@
 # Import the necessary modules.
 import customtkinter as ctk
 from tktooltip import ToolTip
-from tkinter import filedialog, messagebox
+from tkinter import filedialog, messagebox, PhotoImage
 from PIL import Image, ImageTk
 from pathlib import Path
 from random import shuffle
 from threading import Timer
 import ast
 import os, sys
+import platform
 from typing import Any
 
 
 class App(ctk.CTk):
     def __init__(
         self,
-        title: str = "Python Application",
-        icon: str | None = None,
+        windows_icon: str,
+        linux_icon: str,
+        mac_icon: str,
+        title: str = "Image References",
         geometry: tuple[int, int] = (600, 500),
         size_changer_sizes: tuple[int, int] = (600, 1000),
         min_height: int = 0,
@@ -52,7 +55,9 @@ class App(ctk.CTk):
 
         # title and icon settings
         self.title(title)
-        self.iconbitmap(icon)
+        self.set_app_icon(
+            windows_icon=windows_icon, linux_icon=linux_icon, mac_icon=mac_icon
+        )
 
         #  widgets in the app
         # # frame declaration
@@ -139,6 +144,28 @@ class App(ctk.CTk):
                 function=self.load_saved_dir,
             )
             self.timer.start()
+
+    def set_app_icon(self, windows_icon: str, linux_icon: str, mac_icon: str):
+        system = platform.system()
+
+        try:
+            if system == "Windows":
+                self.iconbitmap(windows_icon)
+            elif system == "Linux":
+                img = PhotoImage(file=linux_icon)
+                self.iconphoto(True, img)
+                self._icon_ref = img
+            elif system == "Darwin":  # macOS
+                img = PhotoImage(file=mac_icon)
+                self.iconphoto(True, img)
+                self._icon_ref = img
+            else:
+                img = PhotoImage(file=linux_icon)
+                self.iconphoto(True, img)
+                self._icon_ref = img
+
+        except Exception as e:
+            print(f"Failed to load icon for {system}: {e}")
 
     def load_saved_dir(self):
         self.timer = None
@@ -2039,8 +2066,10 @@ def resource_path(relative_path):
 
 # # setup
 root = App(
+    windows_icon=resource_path("other_essentials/app_icon.ico"),
+    linux_icon=resource_path("other_essentials/app_icon.png"),
+    mac_icon=resource_path("other_essentials/app_icon.icns"),
     title="Image References",
-    icon="other_essentials/app_icon.ico",
     geometry=(550, 650),
     size_changer_sizes=(454, 788),
     min_height=346,
